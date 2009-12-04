@@ -1,0 +1,7 @@
+= bs_itunes_parser
+
+Simple application to parse itunes library.
+
+== Copyright
+
+portions Copyright (c) 2009 Leigh Caplan. See LICENSE for details.
