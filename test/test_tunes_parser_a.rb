@@ -97,14 +97,18 @@ class TestTunesParserA < Test::Unit::TestCase
       assert_equal(247, @my_tunes_parser_a.sum_total_playing_time)
       puts @my_tunes_parser_a.sum_total_playing_time
     end
-    
-    should "15 missing album name" do
-      puts "test- missing album name"
-      puts ""
-      missing_album = @my_tunes_parser_a.find_songs_for_key_value('track id', '1212')
-      puts missing_album[0].inspect
-    end
 
+    should "16 find songs without key" do
+      puts "test- find songs without key"
+      results = @my_tunes_parser_a.find_songs_without_key('album')
+      puts "number of songs without key 'album' = #{results.count}"
+      results.each do |song|
+        song.to_s_simple
+      end
+      #puts results[0].metadata
+      
+      assert_equal(false, results[0].metadata.has_key?('album'))
+    end
   end
 
 end

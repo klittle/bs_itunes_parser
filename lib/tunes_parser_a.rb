@@ -71,13 +71,16 @@ module ItunesParser
       @parsed_lib['songs'].each do |song|
         sum_total += (song.metadata['total time'].to_i)/1000
       end
-      ((sum_total)/3600)  #convert to hours
+      ((sum_total)/3600)  #converts to hours
     end
     
-    # def missing_album_name
-    #       
-    #     end
+    def find_songs_without_key(a_key)
+      songs_without_key_results =  @parsed_lib['songs'].find_all do |song|
+        song.metadata.has_key?(a_key) == false
+      end
+    end
     
+
   end
 end
 
