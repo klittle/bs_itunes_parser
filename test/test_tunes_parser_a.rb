@@ -91,6 +91,19 @@ class TestTunesParserA < Test::Unit::TestCase
       assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track id'))
       assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))
     end
+    
+    should "14 sum total playing time" do
+      puts "test- sum total playing time"
+      assert_equal(247, @my_tunes_parser_a.sum_total_playing_time)
+      puts @my_tunes_parser_a.sum_total_playing_time
+    end
+    
+    should "15 missing album name" do
+      puts "test- missing album name"
+      puts ""
+      missing_album = @my_tunes_parser_a.find_songs_for_key_value('track id', '1212')
+      puts missing_album[0].inspect
+    end
 
   end
 

@@ -16,7 +16,7 @@ module ItunesParser
     end
 
     def song_count
-      @song_count = parsed_lib['songs'].count
+      @song_count = @parsed_lib['songs'].count
     end
 
     def list_summary
@@ -25,7 +25,7 @@ module ItunesParser
     end    
 
     def list_first_song
-      puts parsed_lib['first_song'].inspect
+      puts @parsed_lib['first_song'].inspect
       puts "first song's class #{parsed_lib['first_song'].class}"
       puts "first song's name #{parsed_lib['first_song']['name']}"
       puts "first song's artist #{parsed_lib['first_song']['artist']}"
@@ -38,20 +38,20 @@ module ItunesParser
     end
 
     def list_songs 
-      parsed_lib['songs'].each do |song|
+      @parsed_lib['songs'].each do |song|
         song.to_s_simple
       end
     end
- 
+
     def find_songs_for_artist
-      songs_for_artist = parsed_lib['songs'].find_all do |song|
+      songs_for_artist = @parsed_lib['songs'].find_all do |song|
         song.metadata['artist']=='Cause4Concern'
       end
       songs_for_artist
     end
-    
+
     def find_songs_for_key_value(a_key, a_value)
-      songs_for_key_value = parsed_lib['songs'].find_all do |song|
+      songs_for_key_value = @parsed_lib['songs'].find_all do |song|
         song.metadata[a_key]== a_value
       end
       songs_for_key_value
@@ -59,13 +59,25 @@ module ItunesParser
 
     def count_unique_values_for_key(a_key)
       values_array = [] #array of values
-      parsed_lib['songs'].each do |song|
+      @parsed_lib['songs'].each do |song|
         values_array << song.metadata[a_key]
       end
       puts values_array.uniq.count
       values_array.uniq.count
     end
-   
-  end
 
+    def sum_total_playing_time
+      sum_total = 0 
+      @parsed_lib['songs'].each do |song|
+        sum_total += (song.metadata['total time'].to_i)/1000
+      end
+      ((sum_total)/3600)  #convert to hours
+    end
+    
+    # def missing_album_name
+    #       
+    #     end
+    
+  end
 end
+
