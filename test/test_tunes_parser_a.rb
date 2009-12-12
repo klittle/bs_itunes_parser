@@ -102,13 +102,21 @@ class TestTunesParserA < Test::Unit::TestCase
       puts "test- find songs without key"
       results = @my_tunes_parser_a.find_songs_without_key('album')
       puts "number of songs without key 'album' = #{results.count}"
-      results.each do |song|
-        song.to_s_simple
+      #results.each do |song|
+        #song.to_s_simple
       end
       #puts results[0].metadata
       
       assert_equal(false, results[0].metadata.has_key?('album'))
+      
     end
+    
+    should "17 parse_playlist" do
+      puts "test - runs parse_playlist"
+      parse_playlist
+      puts tracks.map {|t| t.content }
+    end
+    
   end
 
 end
