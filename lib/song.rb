@@ -1,16 +1,16 @@
 module ItunesParser
   class Song
-    attr_accessor :metadata, :playlistmetadata
+    # A hash of info about the song, with keys such as track_id, name and artist
+    attr_accessor :metadata
     
     def initialize
       @metadata = {}
-      @playlistmetadata = {}
     end
     
+    # Returns a string with a simple description of the song
     def to_s_simple
-        "track id = #{@metadata['track id']}  name = #{@metadata['name']}"
+        "track_id = #{@metadata['track_id']}  name = #{@metadata['name']}"
     end
-    
     
   end
 end
