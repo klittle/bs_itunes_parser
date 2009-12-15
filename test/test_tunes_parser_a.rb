@@ -123,44 +123,17 @@ class TestTunesParserA < Test::Unit::TestCase
       end
     end
 
-    should "14 convert seconds to time components" do
-      puts "test- convert seconds to time components"
-      assert_equal(0, @my_tunes_parser_a.seconds_to_time_components(0).seconds)
-      assert_equal(1, @my_tunes_parser_a.seconds_to_time_components(24*60*60).days)
-      test_secs = 3662
-      assert_equal(2, @my_tunes_parser_a.seconds_to_time_components(test_secs).seconds)
-      assert_equal(1, @my_tunes_parser_a.seconds_to_time_components(test_secs).minutes)
-      assert_equal(1, @my_tunes_parser_a.seconds_to_time_components(test_secs).hours)
-      assert_equal(0, @my_tunes_parser_a.seconds_to_time_components(test_secs).days)      
-    end
-
-    should "15 return library songs time components" do
-      puts "test- library songs time components"
-      if @itunes_xml_file_name == 'test/test_library.xml'
-        assert_equal(10, @my_tunes_parser_a.songs_time_components.days)
-        assert_equal(8, @my_tunes_parser_a.songs_time_components.hours)
-        assert_equal(10, @my_tunes_parser_a.songs_time_components.minutes)
-        assert_equal(50, @my_tunes_parser_a.songs_time_components.seconds) 
-      end
-
-      if @itunes_xml_file_name == 'test/testing.xml'
-        assert_equal(0, @my_tunes_parser_a.songs_time_components.days)
-        assert_equal(1, @my_tunes_parser_a.songs_time_components.hours)
-        assert_equal(48, @my_tunes_parser_a.songs_time_components.minutes)
-        assert_equal(13, @my_tunes_parser_a.songs_time_components.seconds) 
-      end
-    end
 
     should "16 return library playing time" do
       puts "test- library playing time"
-      puts @my_tunes_parser_a.library_playing_time
+      puts @my_tunes_parser_a.sum_total_playing_time
       #  TODO: this answer seems about double expected.
       #  are we double counting due to albums?  Duplicate songs with different sample rates?
       if @itunes_xml_file_name == 'test/test_library.xml'
-        assert_equal("Playing time = 10:08:10:50 [dd:hh:mm:ss]", @my_tunes_parser_a.library_playing_time)
+        assert_equal(247, @my_tunes_parser_a.sum_total_playing_time)
       end
       if @itunes_xml_file_name == 'test/testing.xml'
-        assert_equal("Playing time = 00:01:48:13 [dd:hh:mm:ss]", @my_tunes_parser_a.library_playing_time)
+        assert_equal(1, @my_tunes_parser_a.sum_total_playing_time)
       end
     end
 
