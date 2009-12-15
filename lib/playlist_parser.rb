@@ -20,10 +20,10 @@ require 'nokogiri'
 def parse_playlist
   xml = Nokogiri.XML( File.read "/Users/klittle/documents/RubyUW/itunesprojects/bs_itunes_parser/test/test_library.xml")
 
-  
+
   playlist_dicts = xml.xpath( "/plist/dict/array/dict" )
-  
-  playlist_dicts.each do |playlistxml|
+
+  playlist_dicts.each do |playlist_xml|
     name = playlist_xml.xpath( "./key[text()='Name']" ).first.next_sibling.content
     puts "Found playlist called '#{name}'"
 
@@ -53,7 +53,7 @@ def parse_playlist
     # we have something we want now
     tracks = playlist_xml.xpath( "array[1]//integer" )
     puts tracks.map {|t| t.content }
- end
+  end
 end
 
 parse_playlist

@@ -10,8 +10,8 @@ class TestTunesParserA < Test::Unit::TestCase
     setup do
       puts "setup fileRead Context"
       # itunes_xml_file_name = File.dirname(__FILE__) + './test/test_library.xml'
-      itunes_xml_file_name = './test/test_library.xml'
-      @my_tunes_parser_a = ItunesParser::TunesParserA.new(itunes_xml_file_name)
+      @itunes_xml_file_name = './test/test_library.xml'
+      @my_tunes_parser_a = ItunesParser::TunesParserA.new(@itunes_xml_file_name)
     end
 
     should "01 return a TunesParserA" do
@@ -50,8 +50,6 @@ class TestTunesParserA < Test::Unit::TestCase
       # total time in msec
       assert_equal("180035", first_song_in_songs.metadata['total time'])
 
-      # "first_song" in hash is a hash
-      assert_instance_of(Hash, @my_tunes_parser_a.parsed_lib['first_song'])      
     end
 
     should "05 last song is a song" do
@@ -100,23 +98,18 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "16 find songs without key" do
       puts "test- find songs without key"
-      results = @my_tunes_parser_a.find_songs_without_key('album')
-      puts "number of songs without key 'album' = #{results.count}"
-      #results.each do |song|
-        #song.to_s_simple
+      if @tunes_xml_file_name == 'test/test_library.xml'
+      assert_equal(302, @my_tunes_parser_a.find_songs_without_key('album').count)
+      assert_equal(542, @my_tunes_parser_a.find_songs_without_key('genre').count)
+      assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
-      #puts results[0].metadata
-      
-      assert_equal(false, results[0].metadata.has_key?('album'))
-      
     end
     
-    should "17 parse_playlist" do
-      puts "test - runs parse_playlist"
-      parse_playlist
-      puts tracks.map {|t| t.content }
-    end
-    
-  end
+    # should "17 parse_playlist" do
+    #               #puts "test - runs parse_playlist"
+    #               #parse_playlist
+    #             end
+    #             
 
+ end
 end

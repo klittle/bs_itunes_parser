@@ -4,6 +4,7 @@
 require 'active_support'
 require 'nokogiri'
 require 'song'
+require 'playlist'
 
 module ItunesParser
   class Library
@@ -23,17 +24,6 @@ module ItunesParser
       
       version = doc.xpath('/plist/dict/string[1]')[0]
 
-      first_song = doc.xpath('/plist/dict/dict/dict[1]/key')
-
-      # add key-value pair to results hash.  Ref Thomas pg 46
-      results['first_song'] = 
-      # inject method Ref Thomas pg 52-53
-      first_song.inject({}) do |song_info, key|
-        # add key-value pair to song_info hash.
-        song_info[key.content.downcase.underscore] = key.next.content
-        song_info
-      end
-
       all_songs = doc.xpath('/plist/dict/dict/dict')
 
       # In results hash, set key 'songs' to empty array.  Ref Thomas pg 46        
@@ -41,7 +31,6 @@ module ItunesParser
 
       all_songs.each do |track|
         
-        metadata = {}
         song = Song.new
         
         track.xpath('./key').each do |key|
