@@ -83,10 +83,26 @@ module ItunesParser
     # "Puts" the simple description for each playlist in the library
     def list_playlists
       # hash .each method requires key-value pair in block, not key only
-      self.lib.playlists.each do |playlist_id, playlist|
+      self.lib.playlists.each_value do |playlist|
         puts playlist.to_s_simple
       end
     end
-    
+
+    def find_track_ids_for_song_name(song_name)
+      #returns an array for which block is not false
+      songs_for_song_name = self.lib.songs.find_all do |song|
+        song.metadata['name'] == song_name 
+      end
+
+      track_ids_for_song_name = songs_for_song_name.collect do |song|
+        song.metadata['track_id']
+      end      
+      puts track_ids_for_song_name
+      track_ids_for_song_name
+      
+      
+    end
+
   end
+
 end
