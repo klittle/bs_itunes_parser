@@ -94,7 +94,7 @@ module ItunesParser
         playlist_id_value = playlist_xml.xpath( "./key[text()='Playlist ID']" ).first.next_sibling.content
         playlist.metadata['playlist_id'] = playlist_id_value
         tracks = playlist_xml.xpath( "array[1]//integer" )
-        # puts tracks.map {|t| t.content }
+        playlist.track_ids = tracks.map {|t| t.content }
         
         # add playlist to the playlists hash.
         self.playlists[playlist_id_value] = playlist

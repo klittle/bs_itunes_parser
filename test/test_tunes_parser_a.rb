@@ -173,6 +173,12 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_instance_of(ItunesParser::Playlist, @my_tunes_parser_a.lib.playlists['697'])
       end
     end
+    
+    should "32 return an array of songs in playlist" do
+      puts "test- return an array of songs in playlist"
+      puts @my_tunes_parser_a.lib.playlists
+      
+    end
 
 
   end

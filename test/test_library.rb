@@ -33,5 +33,10 @@ class TestLibrary < Test::Unit::TestCase
       # assert @result['songs'].all? { |r| r.is_a?(ItunesParser::Song) }      
       assert @lib.songs.all? { |r| r.is_a?(ItunesParser::Song) }      
     end
+    
+    should "return an array containing Playlist tracks" do
+      puts @lib.playlists['697'].track_ids
+    end
+     
   end
 end

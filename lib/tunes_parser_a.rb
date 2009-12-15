@@ -87,7 +87,6 @@ module ItunesParser
         puts playlist.to_s_simple
       end
     end
-
-
+    
   end
 end
