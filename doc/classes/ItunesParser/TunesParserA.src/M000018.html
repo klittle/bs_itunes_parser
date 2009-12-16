@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_playlists_for_song (ItunesParser::TunesParserA)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 105</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_playlists_for_song</span>(<span class="ruby-identifier">song_name</span>)
+      <span class="ruby-identifier">track_array</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_track_ids_for_song_name</span>(<span class="ruby-identifier">song_name</span>)
+      <span class="ruby-comment cmt"># This array contains matching playlists id for track_ids</span>
+      <span class="ruby-identifier">matching_playlists_array</span> = []
+      <span class="ruby-comment cmt"># Enumerate through each track id for the song name   </span>
+      <span class="ruby-identifier">track_array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a_track_id</span><span class="ruby-operator">|</span>
+
+        <span class="ruby-comment cmt"># Enumerate through playlists</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">playlists</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">playlist</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">track_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">a_track_id</span>)
+            <span class="ruby-identifier">matching_playlists_array</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'playlist_id'</span>]
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>         
+      <span class="ruby-keyword kw">end</span>        
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">matching_playlists_array</span>
+      <span class="ruby-identifier">matching_playlists_array</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

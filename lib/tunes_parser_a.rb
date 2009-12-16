@@ -89,7 +89,7 @@ module ItunesParser
     end
 
     def find_track_ids_for_song_name(song_name)
-      #returns an array for which block is not false
+      # Returns an array for which block is not false
       songs_for_song_name = self.lib.songs.find_all do |song|
         song.metadata['name'] == song_name 
       end
@@ -101,15 +101,15 @@ module ItunesParser
       track_ids_for_song_name 
     end
 
-    # returns array of playlist id for a song
+    # Returns array of playlist id for a song
     def find_playlists_for_song(song_name)
       track_array = self.find_track_ids_for_song_name(song_name)
-      # this array contains matching playlists id for track_ids
+      # This array contains matching playlists id for track_ids
       matching_playlists_array = []
-      # enumerate through each track id for the song name   
+      # Enumerate through each track id for the song name   
       track_array.each do |a_track_id|
 
-        # enumerate through playlists
+        # Enumerate through playlists
         self.lib.playlists.each_value do |playlist|
           if playlist.track_ids.include?(a_track_id)
             matching_playlists_array << playlist.metadata['playlist_id']
@@ -118,6 +118,20 @@ module ItunesParser
       end        
       puts matching_playlists_array
       matching_playlists_array
+    end
+
+    # Returns an array of the names of songs most recently modified
+    def find_recent_songs
+      songs_with_date_modified_pair = self.lib.songs.reject do |song|
+        (!song.metadata.has_key?('date_modified')) or (song.metadata['date_modified'] == nil)
+      end
+
+      songs_by_date_modified = songs_with_date_modified_pair.sort do |a, b| 
+        b.metadata['date_modified'] <=> a.metadata['date_modified']
+      end
+      
+      songs_first = songs_by_date_modified.first(3)
+      song_names = songs_first.collect {|song| song.metadata['name']}   
     end
 
 

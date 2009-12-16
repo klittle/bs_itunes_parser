@@ -87,7 +87,7 @@ module ItunesParser
           end
         end
 
-        # we have something we want now
+        # Creates a playlist hash with name and playlist_id
         playlist = Playlist.new
         
         playlist.metadata['name'] = name

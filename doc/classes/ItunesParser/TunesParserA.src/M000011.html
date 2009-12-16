@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_songs_for_key_value (ItunesParser::TunesParserA)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 41</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_songs_for_key_value</span>(<span class="ruby-identifier">a_key</span>, <span class="ruby-identifier">a_value</span>)
+      <span class="ruby-identifier">songs_for_key_value</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>]<span class="ruby-operator">==</span> <span class="ruby-identifier">a_value</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">songs_for_key_value</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

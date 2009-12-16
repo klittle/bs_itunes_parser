@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>parse_playlists (ItunesParser::Library)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/library.rb, line 61</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse_playlists</span>
+      <span class="ruby-comment cmt">#  A Nokogiri::XML::NodeSet</span>
+      <span class="ruby-identifier">playlist_dicts</span> = <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;/plist/dict/array/dict&quot;</span> )
+
+      <span class="ruby-identifier">playlist_dicts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">playlist_xml</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">playlist_xml</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;./key[text()='Name']&quot;</span> ).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">next_sibling</span>.<span class="ruby-identifier">content</span>
+        <span class="ruby-comment cmt"># puts &quot;Found playlist called '#{name}'&quot;</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">visible</span> = <span class="ruby-identifier">playlist_xml</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;./key[text()='Visible']&quot;</span> )
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">visible</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-comment cmt"># puts &quot;- skipping; invisible&quot;</span>
+            <span class="ruby-keyword kw">next</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">distinguished_kind</span> = <span class="ruby-identifier">playlist_xml</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;./key[text()='Distinguished Kind']&quot;</span> )
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">distinguished_kind</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-comment cmt"># puts &quot;- skipping; has a distinguished kind&quot;</span>
+            <span class="ruby-keyword kw">next</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">smart_info</span> = <span class="ruby-identifier">playlist_xml</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;./key[text()='Smart Info']&quot;</span> )
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">smart_info</span>.<span class="ruby-identifier">empty?</span>
+            <span class="ruby-comment cmt"># puts &quot;- skipping; has smart info&quot;</span>
+            <span class="ruby-keyword kw">next</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt"># Creates a playlist hash with name and playlist_id</span>
+        <span class="ruby-identifier">playlist</span> = <span class="ruby-constant">Playlist</span>.<span class="ruby-identifier">new</span>
+        
+        <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'name'</span>] = <span class="ruby-identifier">name</span>
+        <span class="ruby-identifier">playlist_id_value</span> = <span class="ruby-identifier">playlist_xml</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;./key[text()='Playlist ID']&quot;</span> ).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">next_sibling</span>.<span class="ruby-identifier">content</span>
+        <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'playlist_id'</span>] = <span class="ruby-identifier">playlist_id_value</span>
+        <span class="ruby-identifier">tracks</span> = <span class="ruby-identifier">playlist_xml</span>.<span class="ruby-identifier">xpath</span>( <span class="ruby-value str">&quot;array[1]//integer&quot;</span> )
+        <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">track_ids</span> = <span class="ruby-identifier">tracks</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">content</span> }
+        
+        <span class="ruby-comment cmt"># add playlist to the playlists hash.</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">playlists</span>[<span class="ruby-identifier">playlist_id_value</span>] = <span class="ruby-identifier">playlist</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -12,6 +12,9 @@ class TestLibrary < Test::Unit::TestCase
   end
 
   context "#parse" do
+    #test/testing.xml is the smaller testing file - it is one that is running
+    #test/test_library.xml is larger testing file - to run it - uncomment the line
+    #under set-up in test_library.rb and test_tunes_parser_a.rb
     setup do
       @lib = ItunesParser::Library.new
       
