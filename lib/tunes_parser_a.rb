@@ -102,7 +102,7 @@ module ItunesParser
     end
 
     # returns array of playlist id for a song
-    def find_playlist_for_song(song_name)
+    def find_playlists_for_song(song_name)
       track_array = self.find_track_ids_for_song_name(song_name)
       # this array contains matching playlists id for track_ids
       matching_playlists_array = []

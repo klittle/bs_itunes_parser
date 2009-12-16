@@ -185,10 +185,10 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal(['80'], @my_tunes_parser_a.find_track_ids_for_song_name('Prince Ali'))
     end
     
-    should "34 find_playlist_for_song" do
-      puts "test- find_playlist_for_song"
-        assert_equal(['697', '664'], @my_tunes_parser_a.find_playlist_for_song('Arabian Nights'))
-        # assert_equal(['697'], @my_tunes_parser_a.find_playlist_for_song('Prince Ali'))
+    should "34 find_playlists_for_song" do
+      puts "test- find_playlists_for_song"
+        assert_equal(['697', '664'], @my_tunes_parser_a.find_playlists_for_song('Arabian Nights'))
+        assert_equal(['697'], @my_tunes_parser_a.find_playlists_for_song("Aladdin's Word"))
     end
     
 
