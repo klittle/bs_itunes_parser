@@ -215,7 +215,11 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal(["Green Bird", "Dialogue 1-13", "Dialogue 1-12"], @my_tunes_parser_a.find_recent_songs)
       end
     end
-
+    
+    should "21 find top 5 play songs" do
+      puts "test- find_most_played_songs"
+        assert_equal(["Green Bird", "One Jump Ahead", "Arabian Nights", "Dialogue 1-13", "Legend Of The Lamp"], @my_tunes_parser_a.find_most_played_songs)
+    end
 
 
   end
