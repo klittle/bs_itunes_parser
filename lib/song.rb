@@ -1,3 +1,8 @@
+#Kathy Little
+#Final itunes Project
+#12/16/09
+
+
 module ItunesParser
   class Song
     # A hash of info about the song, with keys such as track_id, name and artist

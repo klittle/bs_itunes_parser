@@ -1,3 +1,8 @@
+#Kathy Little
+#Final itunes Project
+#12/16/09
+
+
 # in Terminal, open main project folder (e.g. bs_itunes_parser), then run autotest.
 
 require 'helper'

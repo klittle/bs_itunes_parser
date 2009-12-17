@@ -1,3 +1,9 @@
+#Kathy Little
+#Final itunes Project
+#12/16/09
+
+
+
 require 'rubygems'
 require 'library'
 require 'active_support'
@@ -72,12 +78,15 @@ module ItunesParser
     end
 
     # Returns total library playing time in hours.
+    # At the moment, this is returning the total play time for Testing.xml in test_tunes_parser_a.rb
     def sum_total_playing_time
       sum_total = 0 
       self.lib.songs.each do |song|
         sum_total += (song.metadata['total_time'].to_i)/1000
       end
-      ((sum_total)/3600)  #converts to hours
+       hour_total = ((sum_total)/3600)
+      puts "The total playing time is #{hour_total} hour"  #converts to hours
+      ((sum_total)/3600)
     end
 
 

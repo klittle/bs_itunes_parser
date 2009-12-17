@@ -1,3 +1,7 @@
+#Kathy Little
+#Final itunes Project
+#12/16/09
+
 # need active_support for underscore method
 # Note underscore converts camel case.  It doesn't replace space with underscore.
 # http://api.rubyonrails.org/classes/ActiveSupport/CoreExtensions/String/Inflections.html

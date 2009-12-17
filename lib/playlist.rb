@@ -1,3 +1,8 @@
+#Kathy Little
+#Final itunes Project
+#12/16/09
+
+
 module ItunesParser
   class Playlist
     # A hash of info about the playlist, with keys such as playlist_id and name

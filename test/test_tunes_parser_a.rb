@@ -1,3 +1,9 @@
+#Kathy Little
+#Final itunes Project
+#12/16/09
+
+
+
 require 'helper'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'tunes_parser_a'
@@ -9,8 +15,6 @@ class TestTunesParserA < Test::Unit::TestCase
   context "#fileRead" do    
     setup do
       puts "setup fileRead Context"
-      # @itunes_xml_file_name = File.dirname(__FILE__) + './test/test_library.xml'
-      #@itunes_xml_file_name = 'test/test_library.xml'
       @itunes_xml_file_name = 'test/testing.xml'
       @my_tunes_parser_a = ItunesParser::TunesParserA.new(@itunes_xml_file_name)
     end
@@ -127,12 +131,13 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "09 return library playing time" do
       puts "test- library playing time"
-      puts @my_tunes_parser_a.sum_total_playing_time
+      #puts @my_tunes_parser_a.sum_total_playing_time
       #  TODO: this answer seems about double expected.
       #  are we double counting due to albums?  Duplicate songs with different sample rates?
       if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(247, @my_tunes_parser_a.sum_total_playing_time)
       end
+      
       if @itunes_xml_file_name == 'test/testing.xml'
         assert_equal(1, @my_tunes_parser_a.sum_total_playing_time)
       end
