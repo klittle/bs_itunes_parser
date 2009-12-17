@@ -87,6 +87,7 @@
 
       <div class="name-list">
       <a href="#M000013">count_unique_values_for_key</a>&nbsp;&nbsp;
+      <a href="#M000020">find_most_played_songs</a>&nbsp;&nbsp;
       <a href="#M000018">find_playlists_for_song</a>&nbsp;&nbsp;
       <a href="#M000019">find_recent_songs</a>&nbsp;&nbsp;
       <a href="#M000011">find_songs_for_key_value</a>&nbsp;&nbsp;
@@ -177,6 +178,24 @@ returns 227
         </div>
       </div>
 
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="TunesParserA.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000020.html');return false;">
+          <span class="method-name">find_most_played_songs</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an array of the name of the Top 5 played songs based on play count
+value
+</p>
+        </div>
+      </div>
+
       <div id="method-M000018" class="method-detail">
         <a name="M000018"></a>
 
@@ -223,11 +242,11 @@ Returns an array of the names of songs most recently modified
       
         <div class="method-description">
           <p>
-Returns an array of songs that match a_key and a_value. Key and value must
-match library exactly. &#8216;Bryson&#8217; will not find &#8216;Peabo
-Bryson&#8217;. Sample: <a
+Returns an array of songs that match a_key and a_value. a_key must match
+exactly. a_value will match songs that include the string
+&quot;a_value&quot;, and is case insensitive. Sample: <a
 href="TunesParserA.html#M000011">find_songs_for_key_value</a>(&#8216;artist&#8217;,
-&#8216;Peabo Bryson Regina Belle, \&amp; David Friedman&#8217;)
+&#8216;ryso&#8217;) finds songs by &quot;Peabo Bryson&quot;
 </p>
         </div>
       </div>

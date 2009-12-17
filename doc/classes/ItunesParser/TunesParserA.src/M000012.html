@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 49</span>
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 55</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_songs_without_key</span>(<span class="ruby-identifier">a_key</span>)
       <span class="ruby-identifier">songs_without_key</span> =  <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">a_key</span>) <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>

@@ -2,7 +2,6 @@ require 'rubygems'
 require 'library'
 require 'active_support'
 require 'nokogiri'
-require 'ostruct'
 
 module ItunesParser
 
@@ -36,11 +35,18 @@ module ItunesParser
     end
 
     # Returns an array of songs that match a_key and a_value.
-    # Key and value must match library exactly. 'Bryson' will not find 'Peabo Bryson'.    
-    # Sample: find_songs_for_key_value('artist', 'Peabo Bryson Regina Belle, \& David Friedman')
+        # a_key must match exactly.
+        # a_value will match songs that include the string "a_value", and is case insensitive.
+        # Sample:  find_songs_for_key_value('artist', 'ryso') finds songs by "Peabo Bryson"
+
+
     def find_songs_for_key_value(a_key, a_value)
+      
       songs_for_key_value = self.lib.songs.find_all do |song|
-        song.metadata[a_key]== a_value
+        #skip song if it has a nil value.  Otherwise string methods downcase and include would fail
+        if (song.metadata[a_key]  != nil)
+          song.metadata[a_key].downcase.include?(a_value.downcase)
+        end
       end
       songs_for_key_value
     end

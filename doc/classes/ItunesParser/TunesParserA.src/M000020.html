@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_most_played_songs (ItunesParser::TunesParserA)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 144</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_most_played_songs</span>
+      <span class="ruby-identifier">top_songs_with_play_count_pair</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment cmt">#this line is describing records it will get rid of</span>
+        (<span class="ruby-operator">!</span><span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value str">'play_count'</span>)) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">top_songs_played_sorted</span> = <span class="ruby-identifier">top_songs_with_play_count_pair</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> 
+        <span class="ruby-identifier">b</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>].<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">top_songs_played</span> = <span class="ruby-identifier">top_songs_played_sorted</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">5</span>)
+      <span class="ruby-identifier">song_names_of_top_played</span> = <span class="ruby-identifier">top_songs_played</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">song</span><span class="ruby-operator">|</span> <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'name'</span>]}   
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
